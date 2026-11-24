@@ -59,16 +59,33 @@ export function ready(channel: Channel) {
   return channel.state.state_name.replace(/[^a-z0-9]/gi, '').toLowerCase() === 'channelready';
 }
 
+// connectPeer resolves once the transport is up, which happens before Bottle sends its Init. Opening a channel in
+// that window fails with "feature not found, waiting for peer to send Init message" and nothing is created, so the
+// open is retried until the peer finishes initializing.
+const peerNotReady = /feature not found|waiting for peer to send Init/i;
+
 export async function connectAndOpenChannel(node: FiberBrowserNode) {
   await node.connectPeer(bottle);
   const existing = await readChannel(node);
   if (!existing) {
     await requireNewChannelFunding(node);
-    await node.openChannel({
-      pubkey: bottle.pubkey,
-      funding_amount: `0x${(channelFundingCkb * 100_000_000n).toString(16)}`,
-      public: true,
-    });
+    const deadline = Date.now() + 45_000;
+    for (;;) {
+      try {
+        await node.openChannel({
+          pubkey: bottle.pubkey,
+          funding_amount: `0x${(channelFundingCkb * 100_000_000n).toString(16)}`,
+          public: true,
+        });
+        break;
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        if (!peerNotReady.test(message)) throw error;
+        if (Date.now() >= deadline) throw new Error('Bottle did not finish the peer handshake. Try again in a moment.');
+        await new Promise((resolve) => setTimeout(resolve, 2_000));
+        if (await readChannel(node)) break;
+      }
+    }
   }
   return readChannel(node);
 }

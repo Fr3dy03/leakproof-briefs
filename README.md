@@ -72,7 +72,8 @@ receipt ticket, and the unlocked brief set as a document. The sealed state rende
 | `lib/ledger.ts` | — | **New.** Validated, public-only record of issued copies (handle + payment hash + title + time, capped at 20, deduped). Only whitelisted fields are written; a passed key or ciphertext is dropped (tested). |
 | `lib/offer.ts` | One opaque encrypted string | Encrypts only the body, per copy; publishes `kind: 'paid-brief'`, a validated `listing` and `buyer.handle`. `parseOffer` rejects non-brief offers, malformed listings and missing/invalid buyer handles, and re-validates the Bottle last-hop hint. Invoice description becomes `Copy for <handle>: <title>`. |
 | `app/page.tsx` | One textarea → one invoice | Publish panel (name, title, preview, sealed body, buyer handle), buyer panel with the public listing, "Sealed for" badge, ciphertext size, payment hash and locked state, per-buyer ledger, and a wrong-handle refusal message. Clear action is blocked while a payment outcome is unresolved. |
-| `lib/payment.ts`, `lib/payment-submission.ts`, `lib/crypto.ts`, `lib/fiber*.ts`, `lib/node-session.ts`, `lib/progress.ts` | — | **Unchanged**, including the starter's safety rules: attempt recorded before submission, restored attempts checked not resent, retry only after a verified failure, expiry blocked. `payment.test.mjs` still covers them. |
+| `lib/payment.ts`, `lib/payment-submission.ts`, `lib/crypto.ts`, `lib/node-session.ts`, `lib/progress.ts` | — | **Unchanged**, including the starter's safety rules: attempt recorded before submission, restored attempts checked not resent, retry only after a verified failure, expiry blocked. `payment.test.mjs` still covers them. |
+| `lib/fiber.ts` | Opened the channel immediately after `connectPeer` | A channel open can arrive before Bottle exchanges its `Init` features, which Fiber rejects with `feature not found, waiting for peer to send Init message`. The open is now retried for up to 45 seconds on that error alone; nothing is created by the failed attempt. Need to know this existed: it cost the first two attempts in the live run. |
 | Tests | 9 | **35** across `payment`, `crypto`, `offer`, `listing`, `ledger`. |
 | Docs | Starter README | This README plus `docs/SUBMISSION.md`, `docs/BASIC-WALKTHROUGH.md`, `docs/ADVANCED-RUN.md`, `docs/REFLECTION.md`, `docs/screenshots/`. |
 
@@ -126,6 +127,11 @@ Testnet finishes only. If a payment is pending, use *Check payment status*; neve
 ## Verification status
 
 Passes: `npm run typecheck`, `npm test` (**35/35**), `npm run build` (`/` prerendered).
-**Not verified here:** the live Testnet flow and all screenshots — those need two funded browser nodes and
-are recorded by hand. `docs/ADVANCED-RUN.md` is the place those results get filled in; until it is, treat the
-Testnet half of this submission as pending.
+
+The live Testnet flow was run on 2026-11-24 with both channels `CHANNEL_READY`: a copy was sealed for
+`58e143c5`, refused when sealed for the wrong handle, paid (1 CKB, fee 0.001), and decrypted byte-for-byte.
+The invoice, payment hash and balances are in [`docs/ADVANCED-RUN.md`](docs/ADVANCED-RUN.md), with six shots
+in [`docs/screenshots/leakproof/`](docs/screenshots/leakproof).
+
+**Not verified:** the four Basic shots from the hosted fiber.world tutorial (they must come from that page,
+not from this app), a second buyer node, and mobile layout.
