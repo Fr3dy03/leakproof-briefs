@@ -12,8 +12,9 @@ The tutorial UI is what the graders expect to see, including the buttons "Decryp
 2. **Start Buyer Node A** and **Start Seller Node C**. Each shows its own funding address. They are different
    addresses; fund each separately from https://faucet.nervos.org. Anything over 500 Testnet CKB per node is
    enough for the channel plus the on-chain fee.
-3. **Connect & open 499 CKB** on both nodes, to Bottle B. Follow the progress steps to
-   `1 Connect peer → 2 Submit funding → 3 Confirm on-chain → 4 Channel ready`. Confirmation can take minutes;
+3. **Connect & open 500 CKB** on both nodes, to Bottle B. The opener's card then reads 400 CKB, not 500: Channel
+   V2 reserves 100 CKB. The progress steps are: `1 Connect peer → 2 Submit funding → 3 Confirm on-chain →
+   4 Channel ready`. Confirmation can take minutes;
    refresh rather than opening a replacement channel.
 4. Keep the default report text (or type your own) in **Seller Node C**, then *Encrypt & create 1 CKB
    Invoice*. Copy the encrypted offer.

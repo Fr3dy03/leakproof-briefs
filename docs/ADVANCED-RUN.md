@@ -12,7 +12,7 @@ preimages, seed phrases or browser storage.**
 | Network | CKB Testnet / Fiber Testnet |
 | Buyer A handle | `58e143c5` |
 | Seller C channel state (A→Bottle, C→Bottle) | both `CHANNEL_READY` |
-| Channel funding | 500 CKB each (Bottle side provisioned 150 CKB inbound on each) |
+| Channel funding | 500 CKB each (opener's card reads 400 CKB after Channel V2's 100 CKB reserve; Bottle side provisioned 150 CKB inbound on each) |
 | Funding addresses | buyer `…q2303dn5dvhd009f26luge4dycsvz2ddwsq8glhe`, seller `…qgc3ld3wzns5ljcv2058sq4ruf4hr8w0sgg3x5cj` |
 | App commit | `09a10c8` (the peer-handshake retry in `lib/fiber.ts` landed with this run) |
 
@@ -59,7 +59,7 @@ Captured from the run above, in `docs/screenshots/leakproof/`:
 
 ## Note on the connect path
 
-The first channel open failed with `Peer Pubkey(…) 's feature not found, waiting for peer to send Init
+The first channel open failed with `Peer Pubkey(02b6…02be71)'s feature not found, waiting for peer to send Init
 message`: `connectPeer` resolves when the transport is up, before Bottle has exchanged features. `lib/fiber.ts`
 now retries the open for up to 45 seconds on exactly that error, which is safe because no channel is created
 by the failed attempt. Both channels opened on the retry.
