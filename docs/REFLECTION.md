@@ -26,11 +26,11 @@ balance.
 
 ## A problem and how I resolved it
 While rebuilding the flow, a channel open failed with "Peer Pubkey(…)'s feature not found, waiting for peer to
-send Init message." I expected the open to work as soon as the peer was connected. It wasn't — the transport
+send Init message." I expected the open to work as soon as the peer was connected. It wasn't the transport
 was up before Bottle had exchanged its features. Retrying once the handshake finished worked, and I ended up
 automating exactly that retry instead of telling the user to click twice.
 
 ## If I could change one thing
 Show the invoice's payment hash next to the invoice before paying, and make "pending" and "failed"
-unmistakable. The recovery rules depend on that difference — a pending payment must be checked, not resent —
+unmistakable. The recovery rules depend on that difference, a pending payment must be checked, not resent
 and the UI never teaches it.
