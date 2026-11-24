@@ -1,6 +1,6 @@
 # Reflection — Build on CKB Campaign #8
 
-Answers the required question plus three optional ones. Written from the actual run recorded in
+Answers the required question plus four optional ones. Written from the actual run recorded in
 `docs/screenshots/` and `docs/ADVANCED-RUN.md`.
 
 ## Required — explanations alongside each interactive step
@@ -22,7 +22,7 @@ hadn't.
 
 ## A step where I was unsure
 
-Why each node needed its own 500 CKB when the report costs 1 CKB, and why the seller needs capacity on
+Why each node needed over 500 CKB on chain when the report costs 1 CKB, and why the seller needs capacity on
 Bottle's side to be paid at all. "Inbound liquidity" only made sense after I watched the B–C bar move on
 payment: whether the seller can receive depends on the other side of the channel, not on the seller's own
 balance.
