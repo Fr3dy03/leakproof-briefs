@@ -13,7 +13,7 @@ everything, and there's no way to jump straight to one concept like last-hop hin
 mildly annoying for a second.
 
 ## What stood out about paying to unlock
-That the buyer holds the ciphertext before paying anything and learns nothing from it. No key is delivered —
+That the buyer holds the ciphertext before paying anything and learns nothing from it. No key is delivered
 the key *is* the invoice's preimage, so the value that proves payment is the value that decrypts. Seeing the
 receipt say 1 CKB plus 0.001 fee next to a document that then opened locally made it click in a way the prose
 hadn't.
