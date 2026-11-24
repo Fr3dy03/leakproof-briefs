@@ -1,4 +1,4 @@
-# Reflection — Build on CKB Campaign #8
+# Reflection 
 
  Written from the actual run recorded in
 `docs/screenshots/` and `docs/ADVANCED-RUN.md`.
