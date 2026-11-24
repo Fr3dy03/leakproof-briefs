@@ -133,5 +133,10 @@ The live Testnet flow was run on 2026-11-24 with both channels `CHANNEL_READY`: 
 The invoice, payment hash and balances are in [`docs/ADVANCED-RUN.md`](docs/ADVANCED-RUN.md), with six shots
 in [`docs/screenshots/leakproof/`](docs/screenshots/leakproof).
 
-**Not verified:** the four Basic shots from the hosted fiber.world tutorial (they must come from that page,
-not from this app), a second buyer node, and mobile layout.
+The Basic quest was completed on the hosted tutorial the same day: both channels `CHANNEL_READY`, 1 CKB settled
+(fee 0.001, total 1.001, hash `0x1e4318…270756`), result decrypted. Four shots with captions in
+[`docs/screenshots/basic/`](docs/screenshots/basic).
+
+**Not verified:** a second buyer node (two copies, two settlements), mobile layout, and anything beyond one
+run per flow. The demo screenshots and `docs/ADVANCED-RUN.md` describe exactly the run that was recorded; no
+other scenario is claimed.

@@ -14,7 +14,7 @@ preimages, seed phrases or browser storage.**
 | Seller C channel state (A→Bottle, C→Bottle) | both `CHANNEL_READY` |
 | Channel funding | 500 CKB each (Bottle side provisioned 150 CKB inbound on each) |
 | Funding addresses | buyer `…q2303dn5dvhd009f26luge4dycsvz2ddwsq8glhe`, seller `…qgc3ld3wzns5ljcv2058sq4ruf4hr8w0sgg3x5cj` |
-| App commit | `fbe2c11` plus the peer-handshake retry in `lib/fiber.ts` |
+| App commit | `09a10c8` (the peer-handshake retry in `lib/fiber.ts` landed with this run) |
 
 ## Copy issued to Buyer A
 
