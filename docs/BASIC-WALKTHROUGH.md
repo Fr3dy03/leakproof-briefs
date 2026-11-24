@@ -22,6 +22,12 @@ The tutorial UI is what the graders expect to see, including the buttons "Decryp
 6. *Pay 1 CKB*. Wait for `Success`; the receipt shows the amount, the routing fee and the payment hash.
 7. **Decrypt result** and compare it with the seller's original text.
 
+## Status
+
+Completed **2026-11-24** on the hosted tutorial: both channels `CHANNEL_READY`, one 1 CKB payment settled
+(fee 0.001 CKB, total 1.001, payment hash `0x1e431860…270756`), result decrypted and matching. The four shots
+are committed with captions in `docs/screenshots/basic/`.
+
 ## The four required screenshots
 
 Save into `docs/screenshots/basic/`, commit, and link the folder in CKBoost.
